@@ -2,8 +2,6 @@ FROM alpine:3.10
 
 LABEL Description="Eclipse Mosquitto MQTT Broker for armhf"
 
-RUN [ "cross-build-start" ]
-
 RUN echo "Installing required packages"
 RUN apk update && apk --no-cache add build-base git libtool autoconf automake cmake pkgconf linux-headers mosquitto-clients
 
@@ -26,8 +24,6 @@ RUN echo "Done, cleaning up"
 RUN cd ~
 RUN rm -rf libmodbus/ mbpoll/
 RUN apk del build-base git libtool autoconf automake cmake pkgconf linux-headers
-
-RUN [ "cross-build-end" ]
 
 VOLUME ["/app/script"]
 CMD ["/bin/sh", "-c", "tail -f /dev/null"]
